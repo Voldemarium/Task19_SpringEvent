@@ -2,15 +2,63 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="myEventListener" class="Stepanov.homework.MyEventListener"/>
-    <bean id="myEventPublisher" class="Stepanov.homework.MyEventPublisher"/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!--Бины без зависимостей-->
+    <bean id="datasource" class="ru.learnUp.Datasource"/>
+    <bean id="httpClient" class="ru.learnUp.HttpClient"/>
+    <bean id="imageService" class="ru.learnUp.ImageService"/>
+
+    <!--Бины с зависимостями-->
+    <bean id="modelsRepository" class="ru.learnUp.ModelsRepository">
+        <constructor-arg ref="datasource"/>
+    </bean>
+
+    <bean id="modelsService" class="ru.learnUp.ModelsService">
+        <constructor-arg ref="modelsRepository"/>
+        <constructor-arg ref="httpClient"/>
+    </bean>
+
+    <bean id="test" class="ru.learnUp.beans.Test"/>
+    <!--    вариант 1 и 2-->
+    <!--    <bean id="b" class="ru.learnUp.beans.B"/>-->
+
+    <!--    вариант 3-->
+    <bean id="b" class="ru.learnUp.beans.B">
+        <!--        <constructor-arg value="world"/>-->
+        <constructor-arg value="${my.tag.value}"/>
+        <!--        <property name="version" value="1"/>-->
+        <property name="version" value="${my.version.value}"/>
+    </bean>
+
+    <bean id="myEventListener" class="ru.learnUp.events.MyEventListener"/>
+    <bean id="myEventPublisher" class="ru.learnUp.events.MyEventPublisher"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="text"/>
         <property name="defaultEncoding" value="windows-1251"/>
+    </bean>
+
+    <!--    вариант 1-->
+    <!--    <bean-->
+    <!--            destroy-method="destroyMe"-->
+    <!--            init-method="initMe"-->
+    <!--            id="a"-->
+    <!--            class="ru.learnUp.beans.A">-->
+    <!--        &lt;!&ndash;     <bean id="a" class="ru.learnUp.beans.A">&ndash;&gt;-->
+    <!--        <constructor-arg name="b" ref="b"/>-->
+    <!--        &lt;!&ndash;        <property name="b" ref="b"/>&ndash;&gt;-->
+    <!--    </bean>-->
+
+    <!--    вариант 2-->
+    <bean id="a" class="ru.learnUp.beans.A">
+        <constructor-arg name="b" ref="b"/>
     </bean>
 
 </beans>

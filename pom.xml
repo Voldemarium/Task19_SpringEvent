@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Stepanov.homework</groupId>
-    <artifactId>Task19_SpringEvent</artifactId>
+    <groupId>ru.learnUp</groupId>
+    <artifactId>spring-xml-configuration</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -13,20 +13,32 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
-   <dependencies>
-       <dependency>
-           <groupId>org.springframework</groupId>
-           <artifactId>spring-core</artifactId>
-           <version>5.3.16</version>
-       </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.3.16</version>
+        </dependency>
 
-       <dependency>
-           <groupId>org.springframework</groupId>
-           <artifactId>spring-context</artifactId>
-           <version>5.3.16</version>
-       </dependency>
-   </dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.16</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.32</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 
 </project>
